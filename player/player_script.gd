@@ -16,7 +16,9 @@ func _ready():
 
 func _fixed_process(delta):
 	var angle_to_target = target.angle_to_point(get_pos())
-	if get_rot() == angle_to_target:
+	if get_pos() == target:
+		pass
+	elif get_rot() == angle_to_target:
 		move_forward(delta)
 	else:
 		var current_rot = angle_conv(get_rot())
