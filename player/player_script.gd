@@ -26,41 +26,19 @@ func _fixed_process(delta):
 		var c_rot = angle_conv(get_rot())
 		var t_rot = angle_conv(dir)
 
-		var left_dis = left_dis(c_rot, t_rot)
-		var right_dis = right_dis(c_rot, t_rot)
-
-		if abs(left_dis) < max_rot || abs(right_dis) < max_rot:
+		var diff = t_rot - c_rot
+		if abs(diff) < max_rot:
 			set_rot(dir)
-		elif left_dis < right_dis:
-			print("Left: " + str(left_dis) + ", " + str(right_dis))
-			set_rot(get_rot()-max_rot)
-		else:
-			print("Right: " + str(left_dis) + ", " + str(right_dis))
+		elif (diff > 0 && diff < PI) || (diff > -2*PI && diff < -PI):
 			set_rot(get_rot()+max_rot)
-
-
-func left_dis(c_rot, t_rot):
-	if c_rot < t_rot:
-		print(str(2 * PI - t_rot + c_rot))
-		return 2 * PI - t_rot + c_rot
-	else:
-		return t_rot - c_rot
-
-
-func right_dis(c_rot, t_rot):
-	if c_rot > t_rot:
-		print(str(2 * PI - c_rot + t_rot))
-		return 2 * PI - c_rot + t_rot
-	else:
-		return c_rot - t_rot
-
+		else:
+			set_rot(get_rot()-max_rot)
 
 func angle_conv(angle):
 	if angle < 0:
-		return 2*PI+angle
+		return angle + 2*PI
 	else:
 		return angle
-
 
 func set_target(pos):
 	target = pos
