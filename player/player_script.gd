@@ -19,6 +19,7 @@ func _fixed_process(delta):
 		move(veloc)
 	else:
 		set_pos(target)
+	set_rot(dir+PI)
 
 func set_target(pos):
 	target = pos
