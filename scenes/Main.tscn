@@ -18,7 +18,7 @@ script/script = ExtResource( 1 )
 transform/pos = Vector2( 340.629, 204.269 )
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 8.44412, 0, 0, 10.1209, 0, 8 )
+shapes/0/transform = Matrix32( 8.44412, 0, 0, 10.1209, 0, -8 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
@@ -27,6 +27,7 @@ script/script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
+initial_rot = 0
 
 [node name="player_sprite" type="Sprite" parent="player_ship"]
 
@@ -35,7 +36,7 @@ texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_ship"]
 
-transform/pos = Vector2( 0, 8 )
+transform/pos = Vector2( 0, -8 )
 transform/scale = Vector2( 8.44412, 10.1209 )
 shape = SubResource( 1 )
 trigger = false

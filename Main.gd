@@ -10,6 +10,6 @@ func _input(ev):
 	# Mouse in viewport coordinates
 	if (ev.type==InputEvent.MOUSE_BUTTON):
 		
-		print("Mouse Click/Unclick at: ", ev.pos)
+		# print("Mouse Click/Unclick at: ", ev.pos)
 		get_node("player_ship").set_target(ev.pos)
 
