@@ -4,33 +4,33 @@ extends KinematicBody2D
 # var a = 2
 # var b = "textvar"
 const speed = 100
-var dir = 0.4
+export(float) var dir
 var max_rot = 0.01
 var target = Vector2(get_pos())
 
 
 func _ready():
 	set_fixed_process(true)
-	set_rot(0.4)
+	set_rot(dir)
 	pass
 
 func _fixed_process(delta):
 	if get_rot() == dir:
-		forward(delta)
+		move_forward(delta)
 	else:
-		var c_rot = angle_conv(get_rot())
-		var t_rot = angle_conv(dir)
+		var current_rot = angle_conv(get_rot())
+		var target_rot = angle_conv(dir)
 
-		var diff = t_rot - c_rot
-		forward(delta)
+		var diff = target_rot - current_rot
+		move_forward(delta)
 		if abs(diff) < max_rot:
 			set_rot(dir)
-		elif (diff > 0 && diff < PI) || (diff > -2*PI && diff < -PI):
-			set_rot(get_rot()+max_rot)
+		elif (diff > 0 && diff < PI) || (diff > -2 * PI && diff < -PI):
+			set_rot(get_rot() + max_rot)
 		else:
-			set_rot(get_rot()-max_rot)
+			set_rot(get_rot() - max_rot)
 
-func forward(delta):
+func move_forward(delta):
 	if get_pos().distance_squared_to(target) > pow(speed * delta, 2):
 		var default = Vector2(0, 1).rotated(get_rot())
 		var veloc = default * speed * delta

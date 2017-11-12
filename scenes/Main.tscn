@@ -27,6 +27,7 @@ script/script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
+dir = 0.0
 
 [node name="player_sprite" type="Sprite" parent="player_ship"]
 
