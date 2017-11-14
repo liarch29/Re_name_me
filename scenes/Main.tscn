@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://player/Player.gd" type="Script" id=2]
 [ext_resource path="res://player/player_ship.png" type="Texture" id=3]
+[ext_resource path="res://player/MoveTargetIndicator.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -41,5 +42,25 @@ transform/scale = Vector2( 8.44412, 10.1209 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
+
+[node name="move_target_indicator" type="Node2D" parent="."]
+
+visibility/visible = false
+script/script = ExtResource( 4 )
+player = NodePath("../player_ship")
+
+[node name="indicator_shape" type="Polygon2D" parent="move_target_indicator"]
+
+polygon = Vector2Array( 0, 10, 10, 0, 0, -10, -10, 0 )
+uv = Vector2Array(  )
+color = Color( 0.078125, 0, 1, 1 )
+vertex_colors = ColorArray(  )
+offset = Vector2( 0, 0 )
+texture/texture = null
+texture/offset = Vector2( 0, 0 )
+texture/scale = Vector2( 1, 1 )
+texture/rotation = 0.0
+invert/enable = false
+invert/border = 100.0
 
 

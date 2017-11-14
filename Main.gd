@@ -12,4 +12,5 @@ func _input(ev):
 		
 		# print("Mouse Click/Unclick at: ", ev.pos)
 		get_node("player_ship").set_target(ev.pos)
+		get_node("move_target_indicator").set_pos(ev.pos)
 
