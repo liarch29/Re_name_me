@@ -32,11 +32,11 @@ onready var _player_ship = get_node("player_ship")
 # ----------------------- #
 
 func _ready():
-	set_process_input(true)
+	set_process_unhandled_input(true)
 	set_fixed_process(true)
 	set_turn(turn)
 
-func _input(ev):
+func _unhandled_input(ev):
 	# Mouse in viewport coordinates
 	if ev.type == InputEvent.MOUSE_BUTTON and not _executing_turn:
 		_player_ship.set_target(ev.pos)
