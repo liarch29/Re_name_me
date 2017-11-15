@@ -25,6 +25,7 @@ signal process_turn
 var _executing_turn = false
 # If the turn is being executed, how far into the turn, in seconds
 var _sim_time = 0.0
+var _elapsed_time = 0.0
 
 onready var _end_turn_button = get_node("end_turn_button")
 onready var _player_ship = get_node("player_ship")
@@ -43,8 +44,10 @@ func _unhandled_input(ev):
 		get_node("move_target_indicator").set_pos(ev.pos)
 
 func _fixed_process(delta):
+	get_node("elapsed_time_label").set_text("Elapsed time: %.2fs" % _elapsed_time)
 	if _executing_turn:
 		_sim_time += delta
+		_elapsed_time += delta
 		get_tree().call_group(0, "entities", "_process_turn", delta)
 		if _sim_time > turn_duration:
 			_executing_turn = false
@@ -54,7 +57,7 @@ func _fixed_process(delta):
 
 func set_turn(new_turn):
 	turn = new_turn
-	get_node("turn_label").text = "Turn: " + str(turn)
+	get_node("turn_label").set_text("Turn: " + str(turn))
 
 func end_turn():
 	_end_turn_button.set_disabled(true)

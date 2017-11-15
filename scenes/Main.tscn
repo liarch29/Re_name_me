@@ -99,6 +99,25 @@ shortcut = null
 text = "End Turn"
 flat = false
 
+[node name="elapsed_time_label" type="Label" parent="."]
+
+anchor/left = 3
+anchor/top = 3
+anchor/right = 3
+anchor/bottom = 3
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = -266.0
+margin/top = 24.0
+margin/right = -485.0
+margin/bottom = 10.0
+text = "Elapsed time:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
 [connection signal="pressed" from="end_turn_button" to="." method="end_turn"]
 
 
