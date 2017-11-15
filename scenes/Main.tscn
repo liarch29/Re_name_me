@@ -13,8 +13,27 @@ extents = Vector2( 3.70631, 10.1802 )
 [node name="Main" type="Node2D"]
 
 script/script = ExtResource( 1 )
+turn = 1
+turn_duration = 10.0
 
-[node name="player_ship" type="KinematicBody2D" parent="."]
+[node name="turn_label" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 5.0
+margin/top = 5.0
+margin/right = 45.0
+margin/bottom = 19.0
+text = "Turn:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="player_ship" type="KinematicBody2D" parent="." groups=[
+"entities",
+]]
 
 transform/pos = Vector2( 340.629, 204.269 )
 input/pickable = false
@@ -45,6 +64,7 @@ _update_shape_index = 0
 
 [node name="move_target_indicator" type="Node2D" parent="."]
 
+editor/display_folded = true
 visibility/visible = false
 script/script = ExtResource( 4 )
 player = NodePath("../player_ship")
@@ -62,5 +82,23 @@ texture/scale = Vector2( 1, 1 )
 texture/rotation = 0.0
 invert/enable = false
 invert/border = 100.0
+
+[node name="end_turn_button" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 8.0
+margin/top = 23.0
+margin/right = 75.0
+margin/bottom = 43.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "End Turn"
+flat = false
+
+[connection signal="pressed" from="end_turn_button" to="." method="end_turn"]
 
 
