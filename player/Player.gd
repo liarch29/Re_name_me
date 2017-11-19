@@ -12,9 +12,8 @@ var target = Vector2(get_pos())
 func _ready():
 	set_fixed_process(true)
 	set_rot(initial_rot)
-	pass
 
-func _fixed_process(delta):
+func _process_turn(delta):
 	var angle_to_target = target.angle_to_point(get_pos())
 	if get_pos() == target:
 		pass
