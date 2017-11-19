@@ -11,10 +11,6 @@ export(int) var turn = 1
 # Duration of one turn, in seconds
 export(float) var turn_duration = 10.0
 
-# Fired when a turn is being processed.
-# The only argument is the time difference from the previous frame
-signal process_turn
-
 # ----------------------- #
 # Implementation details  #
 # Don't modify outside of #
@@ -25,6 +21,7 @@ signal process_turn
 var _executing_turn = false
 # If the turn is being executed, how far into the turn, in seconds
 var _sim_time = 0.0
+# Total time in the game
 var _elapsed_time = 0.0
 
 onready var _end_turn_button = get_node("end_turn_button")
@@ -49,6 +46,8 @@ func _fixed_process(delta):
 		_sim_time += delta
 		_elapsed_time += delta
 		get_tree().call_group(0, "entities", "_process_turn", delta)
+		
+		# If the turn is over
 		if _sim_time > turn_duration:
 			_executing_turn = false
 			_sim_time = 0
