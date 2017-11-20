@@ -40,6 +40,10 @@ func _unhandled_input(ev):
 		_player_ship.set_target(ev.pos)
 		get_node("move_target_indicator").set_pos(ev.pos)
 
+		var entity_demo = ev.pos + Vector2(0, 50)
+		get_node("ship_2").set_target(entity_demo)
+		get_node("move_target_indicator_ship2").set_pos(entity_demo)
+
 func _fixed_process(delta):
 	get_node("elapsed_time_label").set_text("Elapsed time: %.2fs" % _elapsed_time)
 	if _executing_turn:
