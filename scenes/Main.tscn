@@ -116,6 +116,7 @@ editor/display_folded = true
 transform/pos = Vector2( 681.548, 425.798 )
 transform/rot = 50.0
 initial_rot = 50.0
+health = 25.0
 
 [connection signal="pressed" from="end_turn_button" to="." method="end_turn"]
 

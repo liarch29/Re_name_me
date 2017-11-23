@@ -12,6 +12,8 @@ script/script = ExtResource( 1 )
 speed = 100
 initial_rot = 0
 max_rot = 0.01
+max_health = 100
+health = 100
 
 [node name="sprite" type="Sprite" parent="."]
 
@@ -19,5 +21,37 @@ max_rot = 0.01
 
 trigger = false
 _update_shape_index = -1
+
+[node name="healthbar" type="Node2D" parent="."]
+
+visibility/visible = false
+
+[node name="max_hp" type="Polygon2D" parent="healthbar"]
+
+polygon = Vector2Array( 0, 0, 20, 0, 20, 10, 0, 10 )
+uv = Vector2Array(  )
+color = Color( 1, 0, 0, 1 )
+vertex_colors = ColorArray(  )
+offset = Vector2( 0, 0 )
+texture/texture = null
+texture/offset = Vector2( 0, 0 )
+texture/scale = Vector2( 1, 1 )
+texture/rotation = 0.0
+invert/enable = false
+invert/border = 100.0
+
+[node name="current_hp" type="Polygon2D" parent="healthbar"]
+
+polygon = Vector2Array( 0, 0, 20, 0, 20, 10, 0, 10 )
+uv = Vector2Array(  )
+color = Color( 0, 1, 0, 1 )
+vertex_colors = ColorArray(  )
+offset = Vector2( 0, 0 )
+texture/texture = null
+texture/offset = Vector2( 0, 0 )
+texture/scale = Vector2( 1, 1 )
+texture/rotation = 0.0
+invert/enable = false
+invert/border = 100.0
 
 
