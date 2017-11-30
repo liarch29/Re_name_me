@@ -24,13 +24,15 @@ func _process_turn(delta):
 		var target_rot = angle_conv(angle_to_target)
 
 		var diff = target_rot - current_rot
+		var adj_rot = max_rot*(delta/0.015)
+		
 		move_forward(delta)
-		if abs(diff) < max_rot:
+		if abs(diff) < adj_rot:
 			set_rot(angle_to_target)
 		elif (diff > 0 && diff < PI) || (diff > -2 * PI && diff < -PI):
-			set_rot(get_rot() + max_rot)
+			set_rot(get_rot() + adj_rot)
 		else:
-			set_rot(get_rot() - max_rot)
+			set_rot(get_rot() - adj_rot)
 
 func move_forward(delta):
 	if get_pos().distance_squared_to(target) > pow(speed * delta, 2):
