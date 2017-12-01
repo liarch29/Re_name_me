@@ -21,4 +21,8 @@ transform/pos = Vector2( 0, -14 )
 shape = SubResource( 1 )
 _update_shape_index = 0
 
+[node name="healthbar" parent="."]
+
+transform/pos = Vector2( -37.6732, 98.6153 )
+
 

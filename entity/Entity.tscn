@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=1]
+[gd_scene load_steps=3 format=1]
 
 [ext_resource path="res://entity/Entity.gd" type="Script" id=1]
+[ext_resource path="res://entity/ProgressBar.tscn" type="PackedScene" id=2]
 
 [node name="entity" type="KinematicBody2D"]
 
@@ -22,36 +23,6 @@ health = 100
 trigger = false
 _update_shape_index = -1
 
-[node name="healthbar" type="Node2D" parent="."]
-
-visibility/visible = false
-
-[node name="max_hp" type="Polygon2D" parent="healthbar"]
-
-polygon = Vector2Array( 0, 0, 20, 0, 20, 10, 0, 10 )
-uv = Vector2Array(  )
-color = Color( 1, 0, 0, 1 )
-vertex_colors = ColorArray(  )
-offset = Vector2( 0, 0 )
-texture/texture = null
-texture/offset = Vector2( 0, 0 )
-texture/scale = Vector2( 1, 1 )
-texture/rotation = 0.0
-invert/enable = false
-invert/border = 100.0
-
-[node name="current_hp" type="Polygon2D" parent="healthbar"]
-
-polygon = Vector2Array( 0, 0, 20, 0, 20, 10, 0, 10 )
-uv = Vector2Array(  )
-color = Color( 0, 1, 0, 1 )
-vertex_colors = ColorArray(  )
-offset = Vector2( 0, 0 )
-texture/texture = null
-texture/offset = Vector2( 0, 0 )
-texture/scale = Vector2( 1, 1 )
-texture/rotation = 0.0
-invert/enable = false
-invert/border = 100.0
+[node name="healthbar" parent="." instance=ExtResource( 2 )]
 
 
