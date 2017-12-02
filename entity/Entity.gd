@@ -15,6 +15,8 @@ export(float) var max_health = 100
 # The current health of this entity. It is always between 0 and 100, inclusive.
 export(float) var health = 100 setget set_health
 
+signal health_change
+
 # ------------------ #
 # Internal variables #
 # ------------------ #
@@ -29,7 +31,8 @@ onready var _hitbox = get_node("hitbox")
 func _ready():
 	set_rot(initial_rot)
 	_healthbar.max_value = max_health
-	_healthbar.set_value(health)
+	_healthbar.register_value_event("health_change", self)
+	self.emit_signal("health_change", health)
 
 func _process_turn(delta):
 	var angle_to_target = target.angle_to_point(get_pos())
@@ -71,5 +74,4 @@ func set_target(pos):
 # Sets the health of this entity, clamped between 0 and max_health
 func set_health(h):
 	health = clamp(h, 0, max_health)
-	if _healthbar:
-		_healthbar.set_value(health)
+	self.emit_signal("health_change", health)
