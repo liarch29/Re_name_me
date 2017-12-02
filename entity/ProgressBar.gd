@@ -33,5 +33,10 @@ func set_value(new_value):
 
 # Automatically update the value of this progress bar to the one emitted by the
 # target node in the specified signal
-func register_value_event(signal_name, target):
+func register_value_event(signal_name, target, initial_value=null, max_value=null):
 	target.connect(signal_name, self, "set_value")
+	# Note: self.value = x calls set_value(x), so we need to set max first
+	if max_value != null:
+		self.max_value = max_value
+	if initial_value != null:
+		self.value = initial_value

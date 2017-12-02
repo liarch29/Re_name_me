@@ -30,9 +30,7 @@ onready var _hitbox = get_node("hitbox")
 
 func _ready():
 	set_rot(initial_rot)
-	_healthbar.max_value = max_health
-	_healthbar.register_value_event("health_change", self)
-	self.emit_signal("health_change", health)
+	_healthbar.register_value_event("health_change", self, health, max_health)
 
 func _process_turn(delta):
 	var angle_to_target = target.angle_to_point(get_pos())
