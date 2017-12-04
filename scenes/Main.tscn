@@ -1,14 +1,8 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
-[ext_resource path="res://player/Player.gd" type="Script" id=2]
-[ext_resource path="res://player/player_ship.png" type="Texture" id=3]
-[ext_resource path="res://player/MoveTargetIndicator.gd" type="Script" id=4]
-
-[sub_resource type="RectangleShape2D" id=1]
-
-custom_solver_bias = 0.0
-extents = Vector2( 3.70631, 10.1802 )
+[ext_resource path="res://player/MoveTargetIndicator.gd" type="Script" id=2]
+[ext_resource path="res://player/Player.tscn" type="PackedScene" id=3]
 
 [node name="Main" type="Node2D"]
 
@@ -31,42 +25,11 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="player_ship" type="KinematicBody2D" parent="." groups=[
-"entities",
-]]
-
-transform/pos = Vector2( 340.629, 204.269 )
-input/pickable = false
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 8.44412, 0, 0, 10.1209, 0, -8 )
-shapes/0/trigger = false
-collision/layers = 1
-collision/mask = 1
-collision/margin = 0.08
-script/script = ExtResource( 2 )
-__meta__ = {
-"_edit_group_": true
-}
-initial_rot = 0
-
-[node name="player_sprite" type="Sprite" parent="player_ship"]
-
-transform/scale = Vector2( 0.1, 0.1 )
-texture = ExtResource( 3 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="player_ship"]
-
-transform/pos = Vector2( 0, -8 )
-transform/scale = Vector2( 8.44412, 10.1209 )
-shape = SubResource( 1 )
-trigger = false
-_update_shape_index = 0
-
 [node name="move_target_indicator" type="Node2D" parent="."]
 
 editor/display_folded = true
 visibility/visible = false
-script/script = ExtResource( 4 )
+script/script = ExtResource( 2 )
 player = NodePath("../player_ship")
 
 [node name="indicator_shape" type="Polygon2D" parent="move_target_indicator"]
@@ -74,6 +37,26 @@ player = NodePath("../player_ship")
 polygon = Vector2Array( 0, 10, 10, 0, 0, -10, -10, 0 )
 uv = Vector2Array(  )
 color = Color( 0.078125, 0, 1, 1 )
+vertex_colors = ColorArray(  )
+offset = Vector2( 0, 0 )
+texture/texture = null
+texture/offset = Vector2( 0, 0 )
+texture/scale = Vector2( 1, 1 )
+texture/rotation = 0.0
+invert/enable = false
+invert/border = 100.0
+
+[node name="move_target_indicator_ship2" type="Node2D" parent="."]
+
+visibility/visible = false
+script/script = ExtResource( 2 )
+player = NodePath("../ship_2")
+
+[node name="indicator_shape" type="Polygon2D" parent="move_target_indicator_ship2"]
+
+polygon = Vector2Array( 0, 10, 10, 0, 0, -10, -10, 0 )
+uv = Vector2Array(  )
+color = Color( 1, 0, 0, 1 )
 vertex_colors = ColorArray(  )
 offset = Vector2( 0, 0 )
 texture/texture = null
@@ -117,6 +100,23 @@ text = "Elapsed time:"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[node name="player_ship" parent="." groups=[
+"entities",
+] instance=ExtResource( 3 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 223.102, 223.102 )
+
+[node name="ship_2" parent="." groups=[
+"entities",
+] instance=ExtResource( 3 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 681.548, 425.798 )
+transform/rot = 50.0
+initial_rot = 50.0
+health = 25.0
 
 [connection signal="pressed" from="end_turn_button" to="." method="end_turn"]
 
