@@ -17,6 +17,8 @@ export(bool) var show_on_max = true
 
 onready var _current_hp = get_node("current_hp")
 onready var _max_hp = get_node("max_hp")
+var _connect_target = null
+var _connect_signal = null
 
 func _ready():
 	self._current_hp.color = color
@@ -34,9 +36,18 @@ func set_value(new_value):
 # Automatically update the value of this progress bar to the one emitted by the
 # target node in the specified signal
 func register_value_event(signal_name, target, initial_value=null, max_value=null):
+	unregister_value_event()
+	_connect_target = target
+	_connect_signal = signal_name
 	target.connect(signal_name, self, "set_value")
 	# Note: self.value = x calls set_value(x), so we need to set max first
 	if max_value != null:
 		self.max_value = max_value
 	if initial_value != null:
 		self.value = initial_value
+
+func unregister_value_event():
+	if _connect_target and _connect_signal:
+		_connect_target.disconnect(_connect_signal, self, "set_value")
+		_connect_target = null
+		_connect_signal = null

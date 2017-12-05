@@ -23,14 +23,12 @@ signal health_change
 
 # Target position to move to
 onready var target = Vector2(get_pos())
-onready var _healthbar = get_node("healthbar")
 onready var _hitbox = get_node("hitbox")
 
 # ------------------ #
 
 func _ready():
 	set_rot(initial_rot)
-	_healthbar.register_value_event("health_change", self, health, max_health)
 
 func _process_turn(delta):
 	var angle_to_target = target.angle_to_point(get_pos())
@@ -68,7 +66,6 @@ func angle_conv(angle):
 		return angle
 
 func set_target(pos):
-	print("position set ", pos)
 	target = pos
 
 # Sets the health of this entity, clamped between 0 and max_health

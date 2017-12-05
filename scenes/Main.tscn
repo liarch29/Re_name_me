@@ -1,14 +1,21 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://player/MoveTargetIndicator.gd" type="Script" id=2]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://entity/ProgressBar.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 10.0
 
 [node name="Main" type="Node2D"]
 
 script/script = ExtResource( 1 )
 turn = 1
 turn_duration = 10.0
+selected = null
 
 [node name="turn_label" type="Label" parent="."]
 
@@ -117,6 +124,34 @@ transform/pos = Vector2( 681.548, 425.798 )
 transform/rot = 50.0
 initial_rot = 50.0
 health = 25.0
+
+[node name="selected_info" type="Node2D" parent="."]
+
+visibility/visible = false
+
+[node name="health_bar" parent="selected_info" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 35.4572, 562.883 )
+
+[node name="foo" type="KinematicBody2D" parent="."]
+
+transform/pos = Vector2( 740.02, 52.9058 )
+transform/scale = Vector2( 1.87031, 1.7184 )
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 2.46089, 0, 0, 2.62883, 5.32349, -2.81961 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+
+[node name="bar" type="CollisionShape2D" parent="foo"]
+
+transform/pos = Vector2( 5.32349, -2.81961 )
+transform/scale = Vector2( 2.46089, 2.62883 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
 
 [connection signal="pressed" from="end_turn_button" to="." method="end_turn"]
 
