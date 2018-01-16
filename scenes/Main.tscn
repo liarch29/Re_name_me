@@ -1,157 +1,150 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://player/MoveTargetIndicator.gd" type="Script" id=2]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://entity/ProgressBar.tscn" type="PackedScene" id=4]
 
-[sub_resource type="CircleShape2D" id=1]
+[node name="Main" type="Node2D" index="0"]
 
-custom_solver_bias = 0.0
-radius = 10.0
-
-[node name="Main" type="Node2D"]
-
-script/script = ExtResource( 1 )
+script = ExtResource( 1 )
 turn = 1
 turn_duration = 10.0
 selected = null
 
-[node name="turn_label" type="Label" parent="."]
+[node name="turn_label" type="Label" parent="." index="0"]
 
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 5.0
-margin/top = 5.0
-margin/right = 45.0
-margin/bottom = 19.0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 45.0
+margin_bottom = 19.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 2
+size_flags_vertical = 0
 text = "Turn:"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="move_target_indicator" type="Node2D" parent="."]
+[node name="move_target_indicator" type="Node2D" parent="." index="1"]
 
 editor/display_folded = true
-visibility/visible = false
-script/script = ExtResource( 2 )
+visible = false
+script = ExtResource( 2 )
 player = NodePath("../player_ship")
 
-[node name="indicator_shape" type="Polygon2D" parent="move_target_indicator"]
+[node name="indicator_shape" type="Polygon2D" parent="move_target_indicator" index="0"]
 
-polygon = Vector2Array( 0, 10, 10, 0, 0, -10, -10, 0 )
-uv = Vector2Array(  )
+polygon = PoolVector2Array( 0, 10, 10, 0, 0, -10, -10, 0 )
+uv = PoolVector2Array(  )
 color = Color( 0.078125, 0, 1, 1 )
-vertex_colors = ColorArray(  )
+vertex_colors = PoolColorArray(  )
 offset = Vector2( 0, 0 )
-texture/texture = null
-texture/offset = Vector2( 0, 0 )
-texture/scale = Vector2( 1, 1 )
-texture/rotation = 0.0
-invert/enable = false
-invert/border = 100.0
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
 
-[node name="move_target_indicator_ship2" type="Node2D" parent="."]
+[node name="move_target_indicator_ship2" type="Node2D" parent="." index="2"]
 
-visibility/visible = false
-script/script = ExtResource( 2 )
+editor/display_folded = true
+visible = false
+script = ExtResource( 2 )
 player = NodePath("../ship_2")
 
-[node name="indicator_shape" type="Polygon2D" parent="move_target_indicator_ship2"]
+[node name="indicator_shape" type="Polygon2D" parent="move_target_indicator_ship2" index="0"]
 
-polygon = Vector2Array( 0, 10, 10, 0, 0, -10, -10, 0 )
-uv = Vector2Array(  )
+polygon = PoolVector2Array( 0, 10, 10, 0, 0, -10, -10, 0 )
+uv = PoolVector2Array(  )
 color = Color( 1, 0, 0, 1 )
-vertex_colors = ColorArray(  )
+vertex_colors = PoolColorArray(  )
 offset = Vector2( 0, 0 )
-texture/texture = null
-texture/offset = Vector2( 0, 0 )
-texture/scale = Vector2( 1, 1 )
-texture/rotation = 0.0
-invert/enable = false
-invert/border = 100.0
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
 
-[node name="end_turn_button" type="Button" parent="."]
+[node name="end_turn_button" type="Button" parent="." index="3"]
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 8.0
-margin/top = 23.0
-margin/right = 75.0
-margin/bottom = 43.0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 8.0
+margin_top = 23.0
+margin_right = 75.0
+margin_bottom = 43.0
+rect_pivot_offset = Vector2( 0, 0 )
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 2
+size_flags_vertical = 2
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
+group = null
 text = "End Turn"
 flat = false
+align = 1
 
-[node name="elapsed_time_label" type="Label" parent="."]
+[node name="elapsed_time_label" type="Label" parent="." index="4"]
 
-anchor/left = 3
-anchor/top = 3
-anchor/right = 3
-anchor/bottom = 3
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = -266.0
-margin/top = 24.0
-margin/right = -485.0
-margin/bottom = 10.0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 297.0
+margin_top = -57.0
+margin_right = 384.0
+margin_bottom = -43.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 2
+size_flags_vertical = 0
 text = "Elapsed time:"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="player_ship" parent="." groups=[
+[node name="player_ship" parent="." index="5" groups=[
 "entities",
 ] instance=ExtResource( 3 )]
 
 editor/display_folded = true
-transform/pos = Vector2( 223.102, 223.102 )
+position = Vector2( 223.102, 223.102 )
+collision/safe_margin = 0.08
 
-[node name="ship_2" parent="." groups=[
+[node name="ship_2" parent="." index="6" groups=[
 "entities",
 ] instance=ExtResource( 3 )]
 
 editor/display_folded = true
-transform/pos = Vector2( 681.548, 425.798 )
-transform/rot = 50.0
+position = Vector2( 681.548, 425.798 )
+collision/safe_margin = 0.08
 initial_rot = 50.0
 health = 25.0
 
-[node name="selected_info" type="Node2D" parent="."]
+[node name="selected_info" type="Node2D" parent="." index="7"]
 
-visibility/visible = false
+visible = false
 
-[node name="health_bar" parent="selected_info" instance=ExtResource( 4 )]
+[node name="health_bar" parent="selected_info" index="0" instance=ExtResource( 4 )]
 
-transform/pos = Vector2( 35.4572, 562.883 )
-
-[node name="foo" type="KinematicBody2D" parent="."]
-
-transform/pos = Vector2( 740.02, 52.9058 )
-transform/scale = Vector2( 1.87031, 1.7184 )
-input/pickable = true
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 2.46089, 0, 0, 2.62883, 5.32349, -2.81961 )
-shapes/0/trigger = false
-collision/layers = 1
-collision/mask = 1
-collision/margin = 0.08
-
-[node name="bar" type="CollisionShape2D" parent="foo"]
-
-transform/pos = Vector2( 5.32349, -2.81961 )
-transform/scale = Vector2( 2.46089, 2.62883 )
-shape = SubResource( 1 )
-trigger = false
-_update_shape_index = 0
+position = Vector2( 35.4572, 562.883 )
 
 [connection signal="pressed" from="end_turn_button" to="." method="end_turn"]
 

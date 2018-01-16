@@ -1,0 +1,30 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=3
+
+[application]
+
+run/main_scene="res://scenes/MainMenu.tscn"
+icon="res://icon.png"
+main_scene="res://scenes/MainMenu.tscn"
+name="Ship_game"
+
+[display]
+
+window/size/width=800
+window/height=600
+window/width=800
+
+[physics_2d]
+
+motion_fix_enabled=true
+
+[rendering]
+
+quality/intended_usage/framebuffer_allocation=0

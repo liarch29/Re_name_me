@@ -1,10 +1,10 @@
-[gd_scene load_steps=2 format=1]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://entity/ProgressBar.gd" type="Script" id=1]
 
 [node name="progressbar" type="Node2D"]
 
-script/script = ExtResource( 1 )
+script = ExtResource( 1 )
 color = Color( 0, 1, 0, 1 )
 background_color = Color( 1, 0, 0, 1 )
 max_value = 100
@@ -13,30 +13,28 @@ show_on_max = true
 
 [node name="max_hp" type="Polygon2D" parent="."]
 
-polygon = Vector2Array( 0, 0, 75, 0, 75, 10, 0, 10 )
-uv = Vector2Array(  )
+polygon = PoolVector2Array( 0, 0, 75, 0, 75, 10, 0, 10 )
+uv = PoolVector2Array(  )
 color = Color( 1, 0, 0, 1 )
-vertex_colors = ColorArray(  )
+vertex_colors = PoolColorArray(  )
 offset = Vector2( 0, 0 )
-texture/texture = null
-texture/offset = Vector2( 0, 0 )
-texture/scale = Vector2( 1, 1 )
-texture/rotation = 0.0
-invert/enable = false
-invert/border = 100.0
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation = 0.0
+invert_enable = false
+invert_border = 100.0
 
 [node name="current_hp" type="Polygon2D" parent="."]
 
-polygon = Vector2Array( 0, 0, 75, 0, 75, 10, 0, 10 )
-uv = Vector2Array(  )
+polygon = PoolVector2Array( 0, 0, 75, 0, 75, 10, 0, 10 )
+uv = PoolVector2Array(  )
 color = Color( 0, 1, 0, 1 )
-vertex_colors = ColorArray(  )
+vertex_colors = PoolColorArray(  )
 offset = Vector2( 0, 0 )
-texture/texture = null
-texture/offset = Vector2( 0, 0 )
-texture/scale = Vector2( 1, 1 )
-texture/rotation = 0.0
-invert/enable = false
-invert/border = 100.0
-
-
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation = 0.0
+invert_enable = false
+invert_border = 100.0

@@ -22,22 +22,22 @@ signal health_change
 # ------------------ #
 
 # Target position to move to
-onready var target = Vector2(get_pos())
+onready var target = Vector2(self.position)
 onready var _hitbox = get_node("hitbox")
 
 # ------------------ #
 
 func _ready():
-	set_rot(initial_rot)
+	self.rotation = initial_rot
 
 func _process_turn(delta):
-	var angle_to_target = target.angle_to_point(get_pos())
-	if get_pos() == target:
+	var angle_to_target = target.angle_to_point(self.position)
+	if self.position == target:
 		pass
-	elif get_rot() == angle_to_target:
+	elif self.rotation == angle_to_target:
 		move_forward(delta)
 	else:
-		var current_rot = angle_conv(get_rot())
+		var current_rot = angle_conv(self.rotation)
 		var target_rot = angle_conv(angle_to_target)
 
 		var diff = target_rot - current_rot
@@ -45,28 +45,26 @@ func _process_turn(delta):
 		
 		move_forward(delta)
 		if abs(diff) < adj_rot:
-			set_rot(angle_to_target)
+			self.rotation = angle_to_target
 		elif (diff > 0 && diff < PI) || (diff > -2 * PI && diff < -PI):
-			set_rot(get_rot() + adj_rot)
+			self.rotation = self.rotation + adj_rot
 		else:
-			set_rot(get_rot() - adj_rot)
+			self.rotation = self.rotation - adj_rot
 
 func move_forward(delta):
-	if get_pos().distance_squared_to(target) > pow(speed * delta, 2):
-		var default = Vector2(0, 1).rotated(get_rot())
+	if self.position.distance_squared_to(target) > pow(speed * delta, 2):
+		var default = Vector2(0, 1).rotated(self.rotation)
 		var veloc = default * speed * delta
-		move(veloc)
+		var slide_vel = move_and_slide(veloc)
+		self.position += slide_vel
 	else:
-		set_pos(target)
+		self.position = target
 
 func angle_conv(angle):
 	if angle < 0:
 		return angle + 2*PI
 	else:
 		return angle
-
-func set_target(pos):
-	target = pos
 
 # Sets the health of this entity, clamped between 0 and max_health
 func set_health(h):

@@ -1,14 +1,14 @@
-[gd_scene load_steps=2 format=1]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://entity/Entity.gd" type="Script" id=1]
 
 [node name="entity" type="KinematicBody2D"]
 
-input/pickable = true
-collision/layers = 1
-collision/mask = 1
+input_pickable = true
+collision_layer = 1
+collision_mask = 1
 collision/margin = 0.08
-script/script = ExtResource( 1 )
+script = ExtResource( 1 )
 speed = 100
 initial_rot = 0
 max_rot = 0.01
@@ -17,9 +17,8 @@ health = 100
 
 [node name="sprite" type="Sprite" parent="."]
 
+
 [node name="hitbox" type="CollisionShape2D" parent="."]
 
 trigger = false
 _update_shape_index = 0
-
-
