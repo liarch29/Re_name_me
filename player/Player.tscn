@@ -8,7 +8,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 104.738, 33.3646 )
 
-[node name="entity" index="0" instance=ExtResource( 1 )]
+[node name="entity" instance=ExtResource( 1 )]
 
 [node name="sprite" parent="." index="0"]
 

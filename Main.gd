@@ -41,7 +41,7 @@ func _ready():
 		e.connect("input_event", self, "_on_entity_click", [e])
 
 func _on_entity_click(viewport, ev, shape_id, entity):
-	if ev is InputEventMouseButton and ev.is_pressed():
+	if ev.is_pressed() and ev.get_button_index() == BUTTON_LEFT:
 		_selected_info.show()
 		get_tree().set_input_as_handled()
 		_selected_info.get_node("health_bar").register_value_event("on_health_change", entity, entity.health)
