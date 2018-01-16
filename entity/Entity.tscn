@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://entity/Entity.gd" type="Script" id=1]
 
@@ -7,18 +7,15 @@
 input_pickable = true
 collision_layer = 1
 collision_mask = 1
-collision/margin = 0.08
+collision/safe_margin = 0.08
 script = ExtResource( 1 )
 speed = 100
-initial_rot = 0
 max_rot = 0.01
 max_health = 100
 health = 100
 
-[node name="sprite" type="Sprite" parent="."]
+[node name="sprite" type="Sprite" parent="." index="0"]
+
+[node name="hitbox" type="CollisionShape2D" parent="." index="1"]
 
 
-[node name="hitbox" type="CollisionShape2D" parent="."]
-
-trigger = false
-_update_shape_index = 0

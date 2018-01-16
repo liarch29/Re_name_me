@@ -37,6 +37,7 @@ max_lines_visible = -1
 editor/display_folded = true
 visible = false
 script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
 player = NodePath("../player_ship")
 
 [node name="indicator_shape" type="Polygon2D" parent="move_target_indicator" index="0"]
@@ -59,6 +60,7 @@ invert_border = 100.0
 editor/display_folded = true
 visible = false
 script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
 player = NodePath("../ship_2")
 
 [node name="indicator_shape" type="Polygon2D" parent="move_target_indicator_ship2" index="0"]
@@ -126,7 +128,7 @@ max_lines_visible = -1
 
 editor/display_folded = true
 position = Vector2( 223.102, 223.102 )
-collision/safe_margin = 0.08
+rotation = 1.5708
 
 [node name="ship_2" parent="." index="6" groups=[
 "entities",
@@ -134,8 +136,7 @@ collision/safe_margin = 0.08
 
 editor/display_folded = true
 position = Vector2( 681.548, 425.798 )
-collision/safe_margin = 0.08
-initial_rot = 50.0
+rotation = -0.872665
 health = 25.0
 
 [node name="selected_info" type="Node2D" parent="." index="7"]

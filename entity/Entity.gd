@@ -3,9 +3,6 @@ extends KinematicBody2D
 # How far this entity can travel in a straight line in 1 second
 export(float) var speed = 100
 
-# The initial rotation of this entity
-export(float) var initial_rot = 0
-
 # The maximum amount this entity can rotate (radians) in 1 second
 export(float) var max_rot = 0.01
 
@@ -26,9 +23,6 @@ onready var target = Vector2(self.position)
 onready var _hitbox = get_node("hitbox")
 
 # ------------------ #
-
-func _ready():
-	self.rotation = initial_rot
 
 func _process_turn(delta):
 	var angle_to_target = target.angle_to_point(self.position)
@@ -53,16 +47,19 @@ func _process_turn(delta):
 
 func move_forward(delta):
 	if self.position.distance_squared_to(target) > pow(speed * delta, 2):
-		var default = Vector2(0, 1).rotated(self.rotation)
+		var default = Vector2(1, 0).rotated(self.rotation)
 		var veloc = default * speed * delta
-		var slide_vel = move_and_slide(veloc)
-		self.position += slide_vel
+		self.position += veloc
+
+		# Collision logic, but still needs work
+		# var slide_vel = move_and_slide(veloc)
+		# self.position += slide_vel
 	else:
 		self.position = target
 
 func angle_conv(angle):
 	if angle < 0:
-		return angle + 2*PI
+		return angle + 2 * PI
 	else:
 		return angle
 

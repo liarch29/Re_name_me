@@ -6,17 +6,19 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 32.2462, 109.266 )
+extents = Vector2( 104.738, 33.3646 )
 
-[node name="entity" instance=ExtResource( 1 )]
+[node name="entity" index="0" instance=ExtResource( 1 )]
 
+[node name="sprite" parent="." index="0"]
 
-[node name="sprite" parent="."]
-
+position = Vector2( 7, 0 )
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 2 )
 
-[node name="hitbox" parent="."]
+[node name="hitbox" parent="." index="1"]
 
-position = Vector2( 0, -14 )
+position = Vector2( -0.784332, -2.42761 )
 shape = SubResource( 1 )
+
+
