@@ -32,8 +32,8 @@ func draw_guide_line(color):
 	var move_point1 = Vector2(_player.position)
 	var move_point2 = Vector2(_player.position)
 	var rot = _player.rotation
-	var ticks_to_target = (move_point1.distance_to(_player.target)/(_player.speed*average_delta))
-	var max_rot = _player.max_rot*(average_delta/0.015)
+	var ticks_to_target = move_point1.distance_to(_player.target) / (_player.speed * average_delta)
+	var max_rot = _player.max_rot * average_delta
 	# print(average_delta)
 	# return
 	while(1):

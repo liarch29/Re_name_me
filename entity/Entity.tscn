@@ -10,7 +10,7 @@ collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
 speed = 100
-max_rot = 0.01
+max_rot = 0.523599
 max_health = 100
 health = 100
 

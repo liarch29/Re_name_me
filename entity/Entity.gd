@@ -4,7 +4,7 @@ extends KinematicBody2D
 export(float) var speed = 100
 
 # The maximum amount this entity can rotate (radians) in 1 second
-export(float) var max_rot = 0.01
+export(float) var max_rot = PI / 6
 
 # The maximum health of this entity. Set to 0 to make this entity invincible.
 export(float) var max_health = 100
@@ -35,7 +35,7 @@ func _process_turn(delta):
 		var target_rot = angle_conv(angle_to_target)
 
 		var diff = target_rot - current_rot
-		var adj_rot = max_rot * (delta / 0.015)
+		var adj_rot = max_rot * delta
 		
 		move_forward(delta)
 		if abs(diff) < adj_rot:
@@ -67,3 +67,13 @@ func angle_conv(angle):
 func set_health(h):
 	health = clamp(h, 0, max_health)
 	self.emit_signal("health_change", health)
+
+# Whether a point is outside of the minimum turning circles
+func can_turn_to(pos):
+	var min_turn_radius = speed / max_rot
+	var ortho_left = min_turn_radius * Vector2(1, 0).rotated(self.rotation + PI/2)
+	var left_circle = self.position + ortho_left
+	var right_circle = self.position - ortho_left
+	var radius_squared = min_turn_radius * min_turn_radius
+	return left_circle.distance_squared_to(pos) >= radius_squared and \
+		right_circle.distance_squared_to(pos) >= radius_squared

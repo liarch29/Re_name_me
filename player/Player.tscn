@@ -10,6 +10,8 @@ extents = Vector2( 104.738, 33.3646 )
 
 [node name="entity" instance=ExtResource( 1 )]
 
+max_rot = 0.523599
+
 [node name="sprite" parent="." index="0"]
 
 position = Vector2( 7, 0 )

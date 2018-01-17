@@ -50,10 +50,9 @@ func _unhandled_input(ev):
 	# Mouse in viewport coordinates
 	if ev is InputEventMouseButton and ev.is_pressed():
 		if ev.get_button_index() == BUTTON_RIGHT:
-			if not _executing_turn:
+			if not _executing_turn and _player_ship.can_turn_to(ev.position):
 				_player_ship.target = ev.position
 				get_node("move_target_indicator").position = ev.position
-
 				var entity_demo = ev.position + Vector2(0, 50)
 				get_node("ship_2").target = entity_demo
 				get_node("move_target_indicator_ship2").position = entity_demo
