@@ -6,6 +6,7 @@ var _player
 var average_delta = 0.015
 var time_out = 0
 var max_tick_till_time_out = 10000
+var guide_list = []
 
 
 func _ready():
@@ -18,6 +19,8 @@ func _process(delta):
 		self.hide()
 	else:
 		self.show()
+		var color = get_node("indicator_shape").get_color()
+		draw_guide_line(color)
 		update()
 
 func _draw():
@@ -25,17 +28,23 @@ func _draw():
 		var color = get_node("indicator_shape").get_color()
 		# Note: these coordinates are relative to this node
 		# draw_line(_player.position - self.position, Vector2(0, 0), color)
-		draw_guide_line(color)
+		draw_all(color)
+
+func draw_all(color):
+	var move_point1 = Vector2(_player.position)
+	for point in guide_list:
+		draw_line(move_point1-self.position, point-self.position, color)
+		move_point1 = point
 
 func draw_guide_line(color):
 	# var max_rot = _player.max_rot
+	guide_list = []
+	average_delta = 0.1
 	var move_point1 = Vector2(_player.position)
 	var move_point2 = Vector2(_player.position)
 	var rot = _player.rotation
 	var ticks_to_target = move_point1.distance_to(_player.target) / (_player.speed * average_delta)
 	var max_rot = _player.max_rot * average_delta
-	# print(average_delta)
-	# return
 	while(1):
 		move_point2 = move_point1
 		var angle_to_target = _player.target.angle_to_point(move_point1)
@@ -60,5 +69,6 @@ func draw_guide_line(color):
 			break
 
 		time_out += 1
-		draw_line(move_point2 - self.position, move_point1 - self.position, color)
+		guide_list.append(move_point2)
+		#draw_line(move_point2 - self.position, move_point1 - self.position, color)
 
