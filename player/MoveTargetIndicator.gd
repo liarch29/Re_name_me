@@ -13,6 +13,9 @@ var max_draw_time = 10.0
 # Cache of points in the movement approx line
 var move_approx_cache = []
 
+# For performance, keep track of previous positions of player and target
+var previous_endpoints = null
+
 
 func _ready():
 	_player = get_node(player)
@@ -23,11 +26,13 @@ func _process(delta):
 	if _player.position == _player.target:
 		self.hide()
 	else:
+		if previous_endpoints != [_player.position, _player.target]:
+			var color = get_node("indicator_shape").get_color()
+			recalculate_move_approx_line(color)
+			previous_endpoints = [_player.position, _player.target]
+			# Note: "update" as in "schedule a draw call"
+			self.update()
 		self.show()
-		var color = get_node("indicator_shape").get_color()
-		recalculate_move_approx_line(color)
-		# Note: "update" as in "schedule a draw call"
-		self.update()
 
 func _draw():
 	if _player.position != _player.target:
