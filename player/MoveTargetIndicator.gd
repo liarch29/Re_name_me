@@ -81,9 +81,14 @@ func recalculate_move_approx_line(color):
 		else:
 			rot = rot - max_rot
 		
+		move_approx_cache.append(next_point)
 		if previous_point == next_point or draw_time > max_draw_time:
+			drawing = false
+		elif rot == angle_to_target:
+			# Interpolate to keep approximation limits consistent
+			var to_end = next_point.linear_interpolate(_player.target, (max_draw_time - draw_time) / max_draw_time)
+			move_approx_cache.append(to_end)
 			drawing = false
 		else:
 			draw_time += line_draw_rate
-		move_approx_cache.append(next_point)
 		previous_point = next_point
