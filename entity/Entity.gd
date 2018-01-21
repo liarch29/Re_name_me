@@ -47,8 +47,8 @@ func _process_turn(delta):
 
 func move_forward(delta):
 	if self.position.distance_squared_to(target) > pow(speed * delta, 2):
-		var default = Vector2(1, 0).rotated(self.rotation)
-		var veloc = default * speed * delta
+		#TODO: Refactor to dedicated utility/physics class
+		var veloc = Vector2(speed * delta, 0).rotated(self.rotation)
 		self.position += veloc
 
 		# Collision logic, but still needs work

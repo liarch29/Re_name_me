@@ -48,12 +48,14 @@ func draw_move_approx_line(color):
 		previous = next
 
 func recalculate_move_approx_line(color):
-	move_approx_cache.clear()
-	var previous_point = Vector2(_player.position)
-	var rot = _player.rotation
 	var max_rot = _player.max_rot * line_draw_rate
+	var speed_diff = _player.speed * line_draw_rate
+
+	var rot = _player.rotation
+	var previous_point = Vector2(_player.position)
 	var draw_time = 0
 	var drawing = true
+	move_approx_cache.clear()
 	move_approx_cache.append(_player.position)
 	while drawing:
 		var angle_to_target = _player.target.angle_to_point(previous_point)
@@ -61,10 +63,9 @@ func recalculate_move_approx_line(color):
 		var target_rot = _player.angle_conv(angle_to_target)
 		var angle_diff = target_rot - current_rot
 		var next_point = previous_point
-		if previous_point.distance_squared_to(_player.target) > pow(_player.speed * line_draw_rate, 2):
+		if previous_point.distance_squared_to(_player.target) > pow(speed_diff, 2):
 			#TODO: Refactor to dedicated utility/physics class
-			var default = Vector2(1, 0).rotated(rot)
-			var veloc = default * _player.speed * line_draw_rate
+			var veloc = Vector2(speed_diff, 0).rotated(rot)
 			next_point += veloc
 		else:
 			next_point = _player.target
