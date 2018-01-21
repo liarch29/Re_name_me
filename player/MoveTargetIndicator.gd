@@ -37,6 +37,11 @@ func _draw():
 		draw_move_approx_line(color)
 
 func draw_move_approx_line(color):
+#	if move_approx_cache.size() > 1:
+#		var points = PoolVector2Array(move_approx_cache)
+#		for i in range(0, move_approx_cache.size() - 1):
+#			points.set(i, points[i] - self.position)
+#		self.draw_polyline(points, color, 1.0, true)
 	var previous = Vector2(_player.position)
 	for next in move_approx_cache:
 		draw_line(previous - self.position, next - self.position, color)
@@ -45,23 +50,24 @@ func draw_move_approx_line(color):
 func recalculate_move_approx_line(color):
 	move_approx_cache.clear()
 	var previous_point = Vector2(_player.position)
-	var next_point = Vector2(_player.position)
 	var rot = _player.rotation
 	var max_rot = _player.max_rot * line_draw_rate
 	var draw_time = 0
 	var drawing = true
+	move_approx_cache.append(_player.position)
 	while drawing:
 		var angle_to_target = _player.target.angle_to_point(previous_point)
 		var current_rot = _player.angle_conv(rot)
 		var target_rot = _player.angle_conv(angle_to_target)
 		var angle_diff = target_rot - current_rot
+		var next_point = previous_point
 		if previous_point.distance_squared_to(_player.target) > pow(_player.speed * line_draw_rate, 2):
 			#TODO: Refactor to dedicated utility/physics class
 			var default = Vector2(1, 0).rotated(rot)
 			var veloc = default * _player.speed * line_draw_rate
-			previous_point += veloc
+			next_point += veloc
 		else:
-			previous_point = _player.target
+			next_point = _player.target
 		if abs(angle_diff) < max_rot:
 			rot = angle_to_target
 		elif (angle_diff > 0 && angle_diff < PI) || (angle_diff > -2 * PI && angle_diff < -PI):
@@ -73,5 +79,5 @@ func recalculate_move_approx_line(color):
 			drawing = false
 		else:
 			draw_time += line_draw_rate
-			move_approx_cache.append(next_point)
-		next_point = previous_point
+		move_approx_cache.append(next_point)
+		previous_point = next_point
