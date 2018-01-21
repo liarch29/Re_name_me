@@ -85,9 +85,14 @@ func recalculate_move_approx_line(color):
 		if previous_point == next_point or draw_time > max_draw_time:
 			drawing = false
 		elif rot == angle_to_target:
-			# Interpolate to keep approximation limits consistent
-			var to_end = next_point.linear_interpolate(_player.target, (max_draw_time - draw_time) / max_draw_time)
-			move_approx_cache.append(to_end)
+			var rem_time = max_draw_time - draw_time
+			var endpoint = _player.target
+			var dist_squared = next_point.distance_squared_to(_player.target)
+			var max_dist_squared = pow(_player.speed * rem_time, 2)
+			# Ensure line is within approximation limits
+			if dist_squared > max_dist_squared:
+				endpoint = next_point.linear_interpolate(_player.target, sqrt(max_dist_squared / dist_squared))
+			move_approx_cache.append(endpoint)
 			drawing = false
 		else:
 			draw_time += line_draw_rate
