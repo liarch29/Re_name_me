@@ -26,7 +26,6 @@ func _ready():
 
 func set_value(new_value):
 	value = clamp(new_value, 0, self.max_value)
-
 	if max_value > 0 and self._current_hp and self._max_hp:
 		if value != max_value or show_on_max:
 			# Warning: value or max_value may be integers!

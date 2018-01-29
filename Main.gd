@@ -44,7 +44,11 @@ func _on_entity_click(viewport, ev, shape_id, entity):
 	if ev.is_pressed() and ev.get_button_index() == BUTTON_LEFT:
 		_selected_info.show()
 		get_tree().set_input_as_handled()
-		_selected_info.get_node("health_bar").register_value_event("on_health_change", entity, entity.health)
+		_selected_info.get_node("health_bar").register_value_event(
+			"health_change", entity, entity.health, entity.max_health)
+
+		if entity != _player_ship:
+			_player_ship.get_node("Weapons/MainGun").target = entity
 
 func _unhandled_input(ev):
 	# Mouse in viewport coordinates
@@ -65,7 +69,7 @@ func _physics_process(delta):
 		_sim_time += delta
 		_elapsed_time += delta
 		get_tree().call_group("entities", "_process_turn", delta)
-		
+
 		# If the turn is over
 		if _sim_time > turn_duration:
 			_executing_turn = false

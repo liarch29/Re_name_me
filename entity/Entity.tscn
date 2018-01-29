@@ -18,4 +18,6 @@ health = 100
 
 [node name="hitbox" type="CollisionShape2D" parent="." index="1"]
 
+[node name="Weapons" type="Node2D" parent="." index="2"]
+
 

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://entity/Weapon.gd" type="Script" id=1]
+
+[node name="Weapon" type="Node2D" index="0"]
+
+script = ExtResource( 1 )
+fire_damage = 5
+fire_cooldown = 1.0
+fire_range = 300.0
+auto_acquire = false
+
+

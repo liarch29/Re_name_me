@@ -36,7 +36,7 @@ func _process_turn(delta):
 
 		var diff = target_rot - current_rot
 		var adj_rot = max_rot * delta
-		
+
 		move_forward(delta)
 		if abs(diff) < adj_rot:
 			self.rotation = angle_to_target
@@ -44,6 +44,9 @@ func _process_turn(delta):
 			self.rotation = self.rotation + adj_rot
 		else:
 			self.rotation = self.rotation - adj_rot
+
+	for w in get_node("Weapons").get_children():
+		w._process_turn(delta)
 
 func move_forward(delta):
 	if self.position.distance_squared_to(target) > pow(speed * delta, 2):
@@ -67,6 +70,10 @@ func angle_conv(angle):
 func set_health(h):
 	health = clamp(h, 0, max_health)
 	self.emit_signal("health_change", health)
+
+# Causes this entity to be damaged by the given amount
+func damage(h):
+	self.set_health(health - h)
 
 # Whether a point is outside of the minimum turning circles
 func can_turn_to(pos):
